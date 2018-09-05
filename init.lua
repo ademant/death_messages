@@ -26,6 +26,7 @@ local mname = "death_messages"
 -----------------------------------------------------------------------------------------------
 dofile(minetest.get_modpath("death_messages").."/settings.txt")
 -----------------------------------------------------------------------------------------------
+local LANG = minetest.settings:get("language")
 
 -- A table of quips for death messages.  The first item in each sub table is the
 -- default message used when RANDOM_MESSAGES is disabled.
