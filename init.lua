@@ -64,14 +64,6 @@ messages.lava = {
 }
 
 -- Drowning death messages
-messages.water = {
-	" drowned.",
-	" ran out of air.",
-	" failed at swimming lessons.",
-	" tried to impersonate an anchor.",
-	" forgot he wasn't a fish.",
-	" blew one too many bubbles.",
-}
 if lang == "de" then
 messages.water = {
 	" ertrank.",
@@ -79,6 +71,15 @@ messages.water = {
 	" dachte, er sei ein Anker.",
 	" vergass, dass er kein Fisch ist.",
 	" taucht unter."
+}
+else
+messages.water = {
+	" drowned.",
+	" ran out of air.",
+	" failed at swimming lessons.",
+	" tried to impersonate an anchor.",
+	" forgot he wasn't a fish.",
+	" blew one too many bubbles.",
 }
 end
 
