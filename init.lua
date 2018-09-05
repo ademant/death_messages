@@ -27,6 +27,7 @@ local mname = "death_messages"
 dofile(minetest.get_modpath("death_messages").."/settings.txt")
 -----------------------------------------------------------------------------------------------
 local LANG = minetest.settings:get("language")
+if not (LANG and (LANG ~= "")) then LANG = "en" end
 
 -- A table of quips for death messages.  The first item in each sub table is the
 -- default message used when RANDOM_MESSAGES is disabled.
@@ -34,7 +35,13 @@ local messages = {}
 
 -- Default messages
 -- Toxic death messages
-messages.toxic = {
+if LANG == "de" then
+messages.toxic.de = {
+	" ist radioaktiv.",
+	" wusste nicht, das giftiges Wasser gefährlich ist."
+}
+else
+messages.toxic.en = {
 	" melted into a ball of radioactivity.",
 	" thought chemical waste was cool.",
 	" melted into a jittering pile of flesh.",
@@ -45,14 +52,9 @@ messages.toxic = {
 	" is radioactive.",
 	" didn't know toxic water was radioactive."
 }
-if LANG == "de" then
-messages.toxic = {
-	" ist radioaktiv.",
-	" wusste nicht, das giftiges Wasser gefährlich ist."
-}
 end
 -- Lava death messages
-messages.lava = {
+messages.lava.en = {
 	" melted into a ball of fire.",
 	" thought lava was cool.",
 	" melted into a ball of fire.",
@@ -65,16 +67,16 @@ messages.lava = {
 }
 
 -- Drowning death messages
-if LANG == "de" then
-messages.water = {
+--if LANG == "de" then
+messages.water.de = {
 	" ertrank.",
 	" verlor die Luft.",
 	" dachte, er sei ein Anker.",
 	" vergass, dass er kein Fisch ist.",
 	" taucht unter."
 }
-else
-messages.water = {
+--else
+messages.water.en = {
 	" drowned.",
 	" ran out of air.",
 	" failed at swimming lessons.",
@@ -82,10 +84,10 @@ messages.water = {
 	" forgot he wasn't a fish.",
 	" blew one too many bubbles.",
 }
-end
+--end
 
 -- Burning death messages
-messages.fire = {
+messages.fire.en = {
 	" burned to a crisp.",
 	" got a little too warm.",
 	" got too close to the camp fire.",
@@ -94,7 +96,7 @@ messages.fire = {
 }
 
 -- Other death messages
-messages.other = {
+messages.other.en = {
 	" died.",
 	" did something fatal.",
 	" gave up on life.",
@@ -108,7 +110,7 @@ messages.other = {
 	" got blowed up."
 }
 if LANG == "de" then
-messages.other = {
+messages.other.de = {
 	" starb.",
 	" machte etwas Fatales.",
 	" verlor ein Leben.",
@@ -118,7 +120,7 @@ messages.other = {
 end
 
 -- PVP Messages
-messages.pvp = {
+messages.pvp.en = {
 	" fisted",
 	" sliced up",
 	" rekt",
@@ -154,7 +156,7 @@ messages.pvp = {
 }
 
 -- Player Messages
-messages.player = {
+messages.player.en = {
 	" for talking smack about thier mother.",
 	" for cheating at Tic-Tac-Toe.",
 	" for being a stinky poop butt.",
@@ -171,7 +173,7 @@ messages.player = {
 }
 
 -- MOB After Messages
-messages.mobs = {
+messages.mobs.en = {
 	" and was eaten with a gurgling growl.",
 	" then was cooked for dinner.",
 	" then went to the supermarket.",
@@ -188,7 +190,7 @@ messages.mobs = {
 
 function get_message(mtype)
 	if RANDOM_MESSAGES then
-		return messages[mtype][math.random(1, #messages[mtype])]
+		return messages[mtype][LANG][math.random(1, #messages[mtype])]
 	else
 		return messages[1] -- 1 is the index for the non-random message
 	end
