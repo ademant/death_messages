@@ -32,6 +32,9 @@ if not (LANG and (LANG ~= "")) then LANG = "en" end
 -- A table of quips for death messages.  The first item in each sub table is the
 -- default message used when RANDOM_MESSAGES is disabled.
 local messages = {}
+local swas = { en = " was ", de = " war " }
+local sby = { en = " by ", de = " von " }
+local swith = {en = " with ", de = " mit " }
 
 -- Default messages
 -- Toxic death messages
@@ -181,11 +184,9 @@ messages.player = {en = {
 	" with the quickness.",
 	" while texting."
 },de={
-	" betrog beim Tic-Tac-Toe.",
-	" redete schlecht über seine Mutter.",
-	" nervte.",
-	" brachte den Müll nicht raus.",
-	" putzte nicht das Bad."
+	" weil er nervte.",
+	" denn er brachte den Müll nicht raus.",
+	" für das ungeputzte Bad."
 }}
 
 -- MOB After Messages
@@ -203,8 +204,8 @@ messages.mobs = {en = {
 	" for talking smack about Oerkkii's mother.",
 	" and grimmaced wryly."
 },de={
-	" ist das Mittagessen.",
-	" war im Weg."
+	" und ist das Mittagessen.",
+	" weil er im Weg war."
 }}
 
 function get_message(mtype)
@@ -219,77 +220,80 @@ end
 
 
 
-minetest.register_on_dieplayer(function(player)
-	local player_name = player:get_player_name()
-	local node = minetest.registered_nodes[minetest.get_node(player:getpos()).name]
-	local pos = player:getpos()
-	local death = {x=0, y=23, z=-1.5}
-	minetest.sound_play("player_death", {pos = pos, gain = 1})
-	pos.x = math.floor(pos.x + 0.5)
-	pos.y = math.floor(pos.y + 0.5)
-	pos.z = math.floor(pos.z + 0.5)
-	local param2 = minetest.dir_to_facedir(player:get_look_dir())
-	local player_name = player:get_player_name()
-	if minetest.is_singleplayer() then
-		player_name = "You"
-	end
-	
-	-- Death by lava
-	if node.name == "default:lava_source" then
-		minetest.chat_send_all(
-		string.char(0x1b).."(c@#00CED1)"..player_name .. 
-		string.char(0x1b).."(c@#ff0000)"..get_message("lava"))
-		--player:setpos(death)
-	elseif node.name == "default:lava_flowing"  then
-		minetest.chat_send_all(
-		string.char(0x1b).."(c@#00CED1)"..player_name .. 
-		string.char(0x1b).."(c@#ff0000)"..get_message("lava"))
-		--player:setpos(death)
-	-- Death by drowning
-	elseif player:get_breath() == 0 then
-		minetest.chat_send_all(
-		string.char(0x1b).."(c@#00CED1)"..player_name .. 
-		string.char(0x1b).."(c@#ff0000)"..get_message("water"))
-		--player:setpos(death)
-	-- Death by fire
-	elseif node.name == "fire:basic_flame" then
-		minetest.chat_send_all(
-		string.char(0x1b).."(c@#00CED1)"..player_name .. 
-		string.char(0x1b).."(c@#ff0000)"..get_message("fire"))
-		--player:setpos(death)
-	-- Death by Toxic water
-	elseif node.name == "es:toxic_water_source" then
-		minetest.chat_send_all(
-		string.char(0x1b).."(c@#00CED1)"..player_name .. 
-		string.char(0x1b).."(c@#ff0000)"..get_message("toxic"))
-		--player:setpos(death)
-	elseif node.name == "es:toxic_water_flowing" then
-		minetest.chat_send_all(
-		string.char(0x1b).."(c@#00CED1)"..player_name .. 
-		string.char(0x1b).."(c@#ff0000)"..get_message("toxic"))
-		--player:setpos(death)
-	elseif node.name == "groups:radioactive" then
-		minetest.chat_send_all(
-		string.char(0x1b).."(c@#00CED1)"..player_name .. 
-		string.char(0x1b).."(c@#ff0000)"..get_message("toxic"))
-		--player:setpos(death)	
+minetest.register_on_dieplayer(function(player,reason)
+	if reason == nil then
+		local player_name = player:get_player_name()
+		local node = minetest.registered_nodes[minetest.get_node(player:getpos()).name]
+		local pos = player:getpos()
+		local death = {x=0, y=23, z=-1.5}
+		minetest.sound_play("player_death", {pos = pos, gain = 1})
+		pos.x = math.floor(pos.x + 0.5)
+		pos.y = math.floor(pos.y + 0.5)
+		pos.z = math.floor(pos.z + 0.5)
+		local param2 = minetest.dir_to_facedir(player:get_look_dir())
+		local player_name = player:get_player_name()
+		if minetest.is_singleplayer() then
+			player_name = "You"
+		end
 		
-	-- Death by something else
+		-- Death by lava
+		if node.name == "default:lava_source" then
+			minetest.chat_send_all(
+			string.char(0x1b).."(c@#00CED1)"..player_name .. 
+			string.char(0x1b).."(c@#ff0000)"..get_message("lava"))
+			--player:setpos(death)
+		elseif node.name == "default:lava_flowing"  then
+			minetest.chat_send_all(
+			string.char(0x1b).."(c@#00CED1)"..player_name .. 
+			string.char(0x1b).."(c@#ff0000)"..get_message("lava"))
+			--player:setpos(death)
+		-- Death by drowning
+		elseif player:get_breath() == 0 then
+			minetest.chat_send_all(
+			string.char(0x1b).."(c@#00CED1)"..player_name .. 
+			string.char(0x1b).."(c@#ff0000)"..get_message("water"))
+			--player:setpos(death)
+		-- Death by fire
+		elseif node.name == "fire:basic_flame" then
+			minetest.chat_send_all(
+			string.char(0x1b).."(c@#00CED1)"..player_name .. 
+			string.char(0x1b).."(c@#ff0000)"..get_message("fire"))
+			--player:setpos(death)
+		-- Death by Toxic water
+		elseif node.name == "es:toxic_water_source" then
+			minetest.chat_send_all(
+			string.char(0x1b).."(c@#00CED1)"..player_name .. 
+			string.char(0x1b).."(c@#ff0000)"..get_message("toxic"))
+			--player:setpos(death)
+		elseif node.name == "es:toxic_water_flowing" then
+			minetest.chat_send_all(
+			string.char(0x1b).."(c@#00CED1)"..player_name .. 
+			string.char(0x1b).."(c@#ff0000)"..get_message("toxic"))
+			--player:setpos(death)
+		elseif node.name == "groups:radioactive" then
+			minetest.chat_send_all(
+			string.char(0x1b).."(c@#00CED1)"..player_name .. 
+			string.char(0x1b).."(c@#ff0000)"..get_message("toxic"))
+			--player:setpos(death)	
+			
+		-- Death by something else
+		else
+			--minetest.chat_send_all(
+			--string.char(0x1b).."(c@#ffffff)"..player_name .. 
+			--string.char(0x1b).."(c@#ff0000)"..get_message("other"))  --toospammy
+			--minetest.after(0.5, function(holding)
+				--player:setpos(death)  --gamebreaker?
+			--end)
+		end
+		
+		
+		--minetest.chat_send_all(string.char(0x1b).."(c@#000000)".."[DEATH COORDINATES] "..string.char(0x1b).."(c@#ffffff)" .. player_name .. string.char(0x1b).."(c@#000000)".." left a corpse full of diamonds here: " ..
+		--minetest.pos_to_string(pos) .. string.char(0x1b).."(c@#aaaaaa)".." Come and get them!")
+		--player:setpos(death)
+		--minetest.sound_play("pacmine_death", { gain = 0.35})  NOPE!!!
 	else
-		--minetest.chat_send_all(
-		--string.char(0x1b).."(c@#ffffff)"..player_name .. 
-		--string.char(0x1b).."(c@#ff0000)"..get_message("other"))  --toospammy
-		--minetest.after(0.5, function(holding)
-			--player:setpos(death)  --gamebreaker?
-		--end)
+		minetest.chat_send_all(string.char(0x1b)..player:get_player_name().." "..reason)
 	end
-	
-	
-	--minetest.chat_send_all(string.char(0x1b).."(c@#000000)".."[DEATH COORDINATES] "..string.char(0x1b).."(c@#ffffff)" .. player_name .. string.char(0x1b).."(c@#000000)".." left a corpse full of diamonds here: " ..
-	--minetest.pos_to_string(pos) .. string.char(0x1b).."(c@#aaaaaa)".." Come and get them!")
-	--player:setpos(death)
-	--minetest.sound_play("pacmine_death", { gain = 0.35})  NOPE!!!
-	
 end)
 
 --bigfoot code
@@ -315,11 +319,11 @@ minetest.register_on_punchplayer(function(player, hitter)
 					if holding then  
 					minetest.chat_send_all(
 					string.char(0x1b).."(c@#00CED1)"..player:get_player_name()..
-					string.char(0x1b).."(c@#ff0000)".." was"..
+					string.char(0x1b).."(c@#ff0000)"..swas[LANG]..
 					string.char(0x1b).."(c@#ff0000)"..get_message("pvp")..
-					string.char(0x1b).."(c@#ff0000)".." by "..
+					string.char(0x1b).."(c@#ff0000)"..sby[LANG]..
 					string.char(0x1b).."(c@#00CED1)"..hitter:get_player_name()..
-					string.char(0x1b).."(c@#ffffff)".." with "..
+					string.char(0x1b).."(c@#ffffff)"..swith[LANG]..
 					string.char(0x1b).."(c@#FF8C00)"..weap..
 					string.char(0x1b).."(c@#00bbff)"..get_message("player"))  --TODO: make custom mob death messages
 					
@@ -333,9 +337,9 @@ minetest.register_on_punchplayer(function(player, hitter)
 		elseif hitter:get_player_name() == "" and player:get_hp() == 0 then
 					minetest.chat_send_all(
 					string.char(0x1b).."(c@#00CED1)"..player:get_player_name()..
-					string.char(0x1b).."(c@#ff0000)".." was"..
+					string.char(0x1b).."(c@#ff0000)"..swas[LANG]..
 					string.char(0x1b).."(c@#ff0000)"..get_message("pvp")..
-					string.char(0x1b).."(c@#ff0000)".." by "..
+					string.char(0x1b).."(c@#ff0000)"..sby[LANG]..
 					string.char(0x1b).."(c@#FF8C00)"..hitter:get_luaentity().name..  --too many mobs add to crash
 					string.char(0x1b).."(c@#00bbff)"..get_message("mobs"))  --TODO: make custom mob death messages
 					
