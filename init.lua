@@ -35,7 +35,7 @@ local messages = {}
 
 -- Default messages
 -- Toxic death messages
-messages.toxic = {
+messages.toxic = { en = {
 	" melted into a ball of radioactivity.",
 	" thought chemical waste was cool.",
 	" melted into a jittering pile of flesh.",
@@ -45,9 +45,14 @@ messages.toxic = {
 	" thought it was a toxic-tub.",
 	" is radioactive.",
 	" didn't know toxic water was radioactive."
-}
+},
+de={
+	" konnte dem warmen Glühen des giftigen Wassers nicht widerstehen.",
+	" wollte wie Hulk werden.",
+	" ist verstrahlt."
+	}}
 -- Lava death messages
-messages.lava = {
+messages.lava = { en = {
 	" melted into a ball of fire.",
 	" thought lava was cool.",
 	" melted into a ball of fire.",
@@ -57,7 +62,13 @@ messages.lava = {
 	" thought it was a hottub.",
 	" is melted.",
 	" didn't know lava was hot."
-}
+},de={
+	" dachte über Lava laufen ist wie über Wasser laufen.",
+	" nahm ein zu heißes Bad in der Lava.",
+	" schmolz dahin.",
+	" verbrennt wie Papier.",
+	" verbrannte sich die Finger."
+}}
 
 -- Drowning death messages
 messages.water = { en = {
@@ -72,21 +83,28 @@ de = {
 	" verlor die Luft.",
 	" dachte, er sei ein Anker.",
 	" vergass, dass er kein Fisch ist.",
-	" taucht unter."
+	" ist untergetauch.",
+	" wohnt jetzt bei den Fischen.",
+	" starb an einer Überdosis Dihydrogenmonooxyd."
 }}
 --end
 
 -- Burning death messages
-messages.fire = {
+messages.fire = {en = {
 	" burned to a crisp.",
 	" got a little too warm.",
 	" got too close to the camp fire.",
 	" just got roasted, hotdog style.",
 	" got burned up. More light that way."
-}
+},de={
+	" verbrannte sich die Finger.",
+	" wurde geröstet.",
+	" brennt wie eine Fackel.",
+	" spielte mit dem Feuer."
+}}
 
 -- Other death messages
-messages.other = {
+messages.other = {en = {
 	" died.",
 	" did something fatal.",
 	" gave up on life.",
@@ -98,10 +116,17 @@ messages.other = {
 	" got SMOKED.",
 	" got hurted by Oerkki.",
 	" got blowed up."
-}
+},de={
+	" starb.",
+	" machte etwas tödliches.",
+	" ist irgendwie nicht mehr da.",
+	" weilt nicht mehr unter den Lebenden.",
+	" sieht die Radieschen von unten.",
+	" dient als Dünger."
+}}
 
 -- PVP Messages
-messages.pvp = {
+messages.pvp = {en = {
 	" fisted",
 	" sliced up",
 	" rekt",
@@ -134,10 +159,14 @@ messages.pvp = {
 	" shot",
 	" knocked da heck out",
 	" pooped on"
-}
+},de={
+	" geschlagen",
+	" wurde verletzt",
+	" angeschossen"
+}}
 
 -- Player Messages
-messages.player = {
+messages.player = {en = {
 	" for talking smack about thier mother.",
 	" for cheating at Tic-Tac-Toe.",
 	" for being a stinky poop butt.",
@@ -151,10 +180,16 @@ messages.player = {
 	" for using a tablet.",
 	" with the quickness.",
 	" while texting."
-}
+},de={
+	" betrog beim Tic-Tac-Toe.",
+	" redete schlecht über seine Mutter.",
+	" nervte.",
+	" brachte den Müll nicht raus.",
+	" putzte nicht das Bad."
+}}
 
 -- MOB After Messages
-messages.mobs = {
+messages.mobs = {en = {
 	" and was eaten with a gurgling growl.",
 	" then was cooked for dinner.",
 	" then went to the supermarket.",
@@ -167,7 +202,10 @@ messages.mobs = {
 	" so swiftly, that not even Chuck Norris could block.",
 	" for talking smack about Oerkkii's mother.",
 	" and grimmaced wryly."
-}
+},de={
+	" ist das Mittagessen.",
+	" war im Weg."
+}}
 
 function get_message(mtype)
 	if RANDOM_MESSAGES then
