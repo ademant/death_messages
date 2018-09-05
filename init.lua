@@ -31,6 +31,7 @@ dofile(minetest.get_modpath("death_messages").."/settings.txt")
 -- default message used when RANDOM_MESSAGES is disabled.
 local messages = {}
 
+-- Default messages
 -- Toxic death messages
 messages.toxic = {
 	" melted into a ball of radioactivity.",
@@ -43,7 +44,12 @@ messages.toxic = {
 	" is radioactive.",
 	" didn't know toxic water was radioactive."
 }
-
+if lang == "de" then
+messages.toxic = {
+	" ist radioaktiv.",
+	" wusste nicht, das giftiges Wasser gefährlich ist."
+}
+end
 -- Lava death messages
 messages.lava = {
 	" melted into a ball of fire.",
@@ -66,6 +72,15 @@ messages.water = {
 	" forgot he wasn't a fish.",
 	" blew one too many bubbles.",
 }
+if lang == "de" then
+messages.water = {
+	" ertrank.",
+	" verlor die Luft.",
+	" dachte, er sei ein Anker.",
+	" vergass, dass er kein Fisch ist.",
+	" taucht unter."
+}
+end
 
 -- Burning death messages
 messages.fire = {
@@ -90,6 +105,15 @@ messages.other = {
 	" got hurted by Oerkki.",
 	" got blowed up."
 }
+if lang == "de" then
+messages.other = {
+	" starb.",
+	" machte etwas Fatales.",
+	" verlor ein Leben.",
+	" denkt, er sei eine Katze mit noch 8 weiteren Leben.",
+	" konnte im Kampf nicht überzeugen."
+}
+end
 
 -- PVP Messages
 messages.pvp = {
