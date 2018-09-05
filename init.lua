@@ -45,7 +45,7 @@ messages.toxic = {
 	" is radioactive.",
 	" didn't know toxic water was radioactive."
 }
-if lang == "de" then
+if LANG == "de" then
 messages.toxic = {
 	" ist radioaktiv.",
 	" wusste nicht, das giftiges Wasser gefährlich ist."
@@ -65,7 +65,7 @@ messages.lava = {
 }
 
 -- Drowning death messages
-if lang == "de" then
+if LANG == "de" then
 messages.water = {
 	" ertrank.",
 	" verlor die Luft.",
@@ -107,7 +107,7 @@ messages.other = {
 	" got hurted by Oerkki.",
 	" got blowed up."
 }
-if lang == "de" then
+if LANG == "de" then
 messages.other = {
 	" starb.",
 	" machte etwas Fatales.",
@@ -329,5 +329,5 @@ minetest.register_on_punchplayer(function(player, hitter)
 end)
 
 -----------------------------------------------------------------------------------------------
-print("[Mod] "..title.." ["..version.."] ["..mname.."] Loaded...")
+print("[Mod] "..title.." ["..version.."] ["..mname.."] ["..LANG.."] Loaded...")
 -----------------------------------------------------------------------------------------------
