@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 --mods/default/sounds/player_death.ogg: from OpenArena – GNU GPL v2.
 -----------------------------------------------------------------------------------------------
 local title = "Death Messages"
-local version = "0.1.3"
+local version = "0.1.4"
 local mname = "death_messages"
 -----------------------------------------------------------------------------------------------
 dofile(minetest.get_modpath("death_messages").."/settings.txt")
