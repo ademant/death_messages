@@ -298,15 +298,15 @@ minetest.register_on_dieplayer(function(player,reason)
 			string.char(0x1b).."(c@#00CED1)"..player_name .. 
 			string.char(0x1b).."(c@#ff0000)"..get_message("toxic"))
 			--player:setpos(death)	
-		elseif lstamina == 0 then
+		elseif lstamina <= 1 then
 			minetest.chat_send_all(
 			string.char(0x1b).."(c@#00CED1)"..player_name .. 
 			string.char(0x1b).."(c@#ff0000)"..get_message("exhausted"))
 		-- Death by something else
 		else
-			--minetest.chat_send_all(
-			--string.char(0x1b).."(c@#ffffff)"..player_name .. 
-			--string.char(0x1b).."(c@#ff0000)"..get_message("other"))  --toospammy
+			minetest.chat_send_all(
+			string.char(0x1b).."(c@#ffffff)"..player_name .. 
+			string.char(0x1b).."(c@#ff0000)"..get_message("other"))  --toospammy
 			--minetest.after(0.5, function(holding)
 				--player:setpos(death)  --gamebreaker?
 			--end)
