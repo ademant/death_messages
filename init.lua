@@ -216,7 +216,7 @@ messages.mobs = {en = {
 	" weil er im Weg war."
 }}
 
-function get_message(mtype)
+local function get_message(mtype)
 	if RANDOM_MESSAGES then
 		return messages[mtype][LANG][math.random(1, #messages[mtype])]
 	else
@@ -224,6 +224,14 @@ function get_message(mtype)
 	end
 end
 
+local function get_int_attribute(player, key)
+	local level = player:get_attribute(key)
+	if level then
+		return tonumber(level)
+	else
+		return nil
+	end
+end
 
 
 
