@@ -28,6 +28,12 @@ dofile(minetest.get_modpath("death_messages").."/settings.txt")
 -----------------------------------------------------------------------------------------------
 local LANG = minetest.settings:get("language")
 if not (LANG and (LANG ~= "")) then LANG = "en" end
+-- check if stamina is used and death may occured by exhausting
+local mstamina = minetest.get_modpath("stamina")
+local lstamina = 100
+-- check if thirsty is used and death may occured by exhausting
+local mthirsty = minetest.get_modpath("thirsty")
+local lthirsty = 100
 
 -- A table of quips for death messages.  The first item in each sub table is the
 -- default message used when RANDOM_MESSAGES is disabled.
@@ -134,6 +140,13 @@ messages.exhausted = {en = {
 	},
 	de = {
 	" war erschöpft."
+	}}
+-- thirst
+messages.thirst = {en = {
+	" was too thirsty."
+	},
+	de = {
+	" verdurstete."
 	}}
 	
 -- PVP Messages
@@ -252,11 +265,11 @@ minetest.register_on_dieplayer(function(player,reason)
 			player_name = "You"
 		end
 		
-		-- check if stamina is used and death may occured by exhausting
-		local mstamina = minetest.get_modpath("stamina")
-		local lstamina = 100
 		if mstamina ~= nil then
 			lstamina = get_int_attribute(player, "stamina:level")
+		end
+		if mthirsty ~= nil then
+			lthirsty = thirsty.get_thirst_factor(player)
 		end
 		
 		-- Death by lava
@@ -302,6 +315,10 @@ minetest.register_on_dieplayer(function(player,reason)
 			minetest.chat_send_all(
 			string.char(0x1b).."(c@#00CED1)"..player_name .. 
 			string.char(0x1b).."(c@#ff0000)"..get_message("exhausted"))
+		elseif lthirsty <= 1 then
+			minetest.chat_send_all(
+			string.char(0x1b).."(c@#00CED1)"..player_name .. 
+			string.char(0x1b).."(c@#ff0000)"..get_message("thirst"))
 		-- Death by something else
 		else
 			minetest.chat_send_all(
