@@ -36,6 +36,8 @@ local mthirsty = minetest.get_modpath("thirsty")
 local lthirsty = 100
 local msunburn = minetest.get_modpath("sunburn")
 local lsunburn = 0
+local mhbhunger = minetest.get_modpath("hbhunger")
+local lhbhunger = 100
 
 -- A table of quips for death messages.  The first item in each sub table is the
 -- default message used when RANDOM_MESSAGES is disabled.
@@ -275,11 +277,14 @@ minetest.register_on_dieplayer(function(player,reason)
 		if mstamina ~= nil then
 			lstamina = get_int_attribute(player, "stamina:level")
 		end
+		if mhbhunger ~= nil then
+			lstamina = tonumber(hbhunger.hunger[player_name])
+		end
 		if mthirsty ~= nil then
 			lthirsty = thirsty.get_thirst_factor(player)
 		end
 		if msunburn ~= nil then
-			lsunburn = PPA.get_value(player, "sunburn_sunburn")
+			lsunburn = sunburn.get_sunburn(player)
 		end
 		
 		-- Death by lava
