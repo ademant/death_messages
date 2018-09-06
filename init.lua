@@ -34,6 +34,8 @@ local lstamina = 100
 -- check if thirsty is used and death may occured by exhausting
 local mthirsty = minetest.get_modpath("thirsty")
 local lthirsty = 100
+local msunburn = minetest.get_modpath("sunburn")
+local lsunburn = 0
 
 -- A table of quips for death messages.  The first item in each sub table is the
 -- default message used when RANDOM_MESSAGES is disabled.
@@ -147,6 +149,12 @@ messages.thirst = {en = {
 	},
 	de = {
 	" verdurstete."
+	}}
+messages.sunburn = {en = {
+	" burned by sun."
+	},
+	de = {
+	" ist von der Sonne verbrannt."
 	}}
 	
 -- PVP Messages
@@ -264,12 +272,14 @@ minetest.register_on_dieplayer(function(player,reason)
 		if minetest.is_singleplayer() then
 			player_name = "You"
 		end
-		
 		if mstamina ~= nil then
 			lstamina = get_int_attribute(player, "stamina:level")
 		end
 		if mthirsty ~= nil then
 			lthirsty = thirsty.get_thirst_factor(player)
+		end
+		if msunburn ~= nil then
+			lsunburn = PPA.get_value(player, "sunburn_sunburn")
 		end
 		
 		-- Death by lava
@@ -311,14 +321,18 @@ minetest.register_on_dieplayer(function(player,reason)
 			string.char(0x1b).."(c@#00CED1)"..player_name .. 
 			string.char(0x1b).."(c@#ff0000)"..get_message("toxic"))
 			--player:setpos(death)	
-		elseif lstamina <= 1 then
-			minetest.chat_send_all(
-			string.char(0x1b).."(c@#00CED1)"..player_name .. 
-			string.char(0x1b).."(c@#ff0000)"..get_message("exhausted"))
 		elseif lthirsty <= 1 then
 			minetest.chat_send_all(
 			string.char(0x1b).."(c@#00CED1)"..player_name .. 
 			string.char(0x1b).."(c@#ff0000)"..get_message("thirst"))
+		elseif lstamina <= 1 then
+			minetest.chat_send_all(
+			string.char(0x1b).."(c@#00CED1)"..player_name .. 
+			string.char(0x1b).."(c@#ff0000)"..get_message("exhausted"))
+		elseif lsunburn >= 19 then
+			minetest.chat_send_all(
+			string.char(0x1b).."(c@#00CED1)"..player_name .. 
+			string.char(0x1b).."(c@#ff0000)"..get_message("sunburn"))
 		-- Death by something else
 		else
 			minetest.chat_send_all(
