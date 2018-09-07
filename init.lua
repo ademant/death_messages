@@ -78,9 +78,12 @@ messages.lava = { en = {
 },de={
 	" dachte über Lava laufen ist wie über Wasser laufen.",
 	" nahm ein zu heißes Bad in der Lava.",
-	" schmolz dahin.",
+	" schmolz in der Lava dahin.",
 	" verbrennt wie Papier.",
-	" verbrannte sich die Finger."
+	" verbrannte sich die Finger.",
+	" versuchte in Lava zu baden.",
+	" wurde von der Lava gegrillt.",
+	" hat sich an der Lava verbrannt."
 }}
 
 -- Drowning death messages
@@ -96,9 +99,11 @@ de = {
 	" verlor die Luft.",
 	" dachte, er sei ein Anker.",
 	" vergass, dass er kein Fisch ist.",
-	" ist untergetauch.",
+	" ist untergetaucht.",
 	" wohnt jetzt bei den Fischen.",
-	" starb an einer Überdosis Dihydrogenmonooxyd."
+	" starb an einer Überdosis Dihydrogenmonooxyd.",
+	" vergass aufzutauchen.",
+	" versank und tauchte nicht mehr auf."
 }}
 --end
 
@@ -112,6 +117,7 @@ messages.fire = {en = {
 },de={
 	" verbrannte sich die Finger.",
 	" wurde geröstet.",
+	" wurde gegrillt.",
 	" brennt wie eine Fackel.",
 	" spielte mit dem Feuer."
 }}
@@ -131,7 +137,7 @@ messages.other = {en = {
 	" got blowed up."
 },de={
 	" starb.",
-	" machte etwas tödliches.",
+	" machte etwas Tödliches.",
 	" ist irgendwie nicht mehr da.",
 	" weilt nicht mehr unter den Lebenden.",
 	" sieht die Radieschen von unten.",
@@ -143,20 +149,23 @@ messages.exhausted = {en = {
 	" was exhausted."
 	},
 	de = {
-	" war erschöpft."
+	" war erschöpft.",
+	" vergass sein Pausenbrot zu Hause."
 	}}
 -- thirst
 messages.thirst = {en = {
 	" was too thirsty."
 	},
 	de = {
-	" verdurstete."
+	" verdurstete.",
+	" vergass sein Wasser zu Hause."
 	}}
 messages.sunburn = {en = {
 	" burned by sun."
 	},
 	de = {
-	" ist von der Sonne verbrannt."
+	" ist von der Sonne verbrannt.",
+	" war zu lange in der Sonner."
 	}}
 	
 -- PVP Messages
@@ -196,7 +205,11 @@ messages.pvp = {en = {
 },de={
 	" geschlagen",
 	" wurde verletzt",
-	" angeschossen"
+	" angeschossen",
+	" hitted",
+	" begraben",
+	" angegriffen",
+	" wurde eine Lektion erteilt"
 }}
 
 -- Player Messages
@@ -217,7 +230,16 @@ messages.player = {en = {
 },de={
 	" weil er nervte.",
 	" denn er brachte den Müll nicht raus.",
-	" für das ungeputzte Bad."
+	" für das ungeputzte Bad.",
+	" da er keine Milch einkaufte.",
+	" weil er die Hausaufgaben vergass.",
+	" für das Ärgern des kleinen Bruders.",
+	" für das Ärgern des großen Bruders.",
+	" denn er hörte nicht auf seine Mutter.",
+	" er gebrauchte zu oft das Wort digga.",
+	" aus nicht näher genannten Gründen.",
+	" für den Versuch bei Tic-Tac-Toe zu betrügen.",
+	" denn er war nicht gut genug für den Kampf."
 }}
 
 -- MOB After Messages
@@ -235,13 +257,27 @@ messages.mobs = {en = {
 	" for talking smack about Oerkkii's mother.",
 	" and grimmaced wryly."
 },de={
+	" zu schnell selbst für Chuck Norris.",
+	" in einer tödlichen Weise.",
 	" und ist das Mittagessen.",
-	" weil er im Weg war."
+	" und anschließend wieder ausgespuckt.",
+	" weil er im Weg war.",
+	" denn er brachte den Müll nicht raus.",
+	" für das ungeputzte Bad.",
+	" da er keine Milch einkaufte.",
+	" weil er die Hausaufgaben vergass.",
+	" für das Ärgern des kleinen Bruders.",
+	" für das Ärgern des großen Bruders.",
+	" denn er hörte nicht auf seine Mutter.",
+	" er gebrauchte zu oft das Wort digga.",
+	" aus nicht näher genannten Gründen.",
+	" für den Versuch bei Tic-Tac-Toe zu betrügen.",
+	" denn er war nicht gut genug für den Kampf."
 }}
 
 local function get_message(mtype)
 	if RANDOM_MESSAGES then
-		return messages[mtype][LANG][math.random(1, #messages[mtype])]
+		return messages[mtype][LANG][math.random(1, #messages[mtype][LANG])]
 	else
 		return messages[1] -- 1 is the index for the non-random message
 	end
