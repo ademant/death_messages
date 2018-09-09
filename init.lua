@@ -26,8 +26,13 @@ local mname = "death_messages"
 -----------------------------------------------------------------------------------------------
 dofile(minetest.get_modpath("death_messages").."/settings.txt")
 -----------------------------------------------------------------------------------------------
+-- check the language
 local LANG = minetest.settings:get("language")
 if not (LANG and (LANG ~= "")) then LANG = "en" end
+-- actual only english and german is implemented. If language is not german than set to english
+-- to be extended, if more languages are added.
+if LANG ~= "de" then LANG = "en" end
+
 -- check if stamina is used and death may occured by exhausting
 local mstamina = minetest.get_modpath("stamina")
 local lstamina = 100
@@ -74,7 +79,8 @@ messages.lava = { en = {
 	" went into the lava curtain.",
 	" thought it was a hottub.",
 	" is melted.",
-	" didn't know lava was hot."
+	" didn't know lava was hot.",
+	" went for a closer look at lava"
 },de={
 	" dachte über Lava laufen ist wie über Wasser laufen.",
 	" nahm ein zu heißes Bad in der Lava.",
@@ -83,7 +89,8 @@ messages.lava = { en = {
 	" verbrannte sich die Finger.",
 	" versuchte in Lava zu baden.",
 	" wurde von der Lava gegrillt.",
-	" hat sich an der Lava verbrannt."
+	" hat sich an der Lava verbrannt.",
+	" kam der Lava zu nahe."
 }}
 
 -- Drowning death messages
