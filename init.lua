@@ -28,16 +28,15 @@ dofile(minetest.get_modpath("death_messages").."/settings.txt")
 -----------------------------------------------------------------------------------------------
 local LANG = minetest.settings:get("language")
 if not (LANG and (LANG ~= "")) then LANG = "en" end
--- check if stamina is used and death may occured by exhausting
+-- check if stamina and/or hbhunger is used and death may occured by exhausting
 local mstamina = minetest.get_modpath("stamina")
+local mhbhunger = minetest.get_modpath("hbhunger")
 local lstamina = 100
 -- check if thirsty is used and death may occured by exhausting
 local mthirsty = minetest.get_modpath("thirsty")
 local lthirsty = 100
 local msunburn = minetest.get_modpath("sunburn")
 local lsunburn = 0
-local mhbhunger = minetest.get_modpath("hbhunger")
-local lhbhunger = 100
 
 -- A table of quips for death messages.  The first item in each sub table is the
 -- default message used when RANDOM_MESSAGES is disabled.

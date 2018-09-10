@@ -7,11 +7,15 @@
 
 A Minetest mod which sends a chat message when a player dies.
 
-Version: 0.1.3
+Version: 0.1.4
 License: GPL v3 (see LICENSE.txt)
 
 Dependencies:
 none
 
+
 Please report bugs at the github issue tracker:
+https://notabug.org/ademant/death_messages/issues/
+
+This is a fork of
 https://github.com/4Evergreen4/death_messages/issues/
