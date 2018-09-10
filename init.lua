@@ -26,13 +26,8 @@ local mname = "death_messages"
 -----------------------------------------------------------------------------------------------
 dofile(minetest.get_modpath("death_messages").."/settings.txt")
 -----------------------------------------------------------------------------------------------
--- check the language
 local LANG = minetest.settings:get("language")
 if not (LANG and (LANG ~= "")) then LANG = "en" end
--- actual only english and german is implemented. If language is not german than set to english
--- to be extended, if more languages are added.
-if LANG ~= "de" then LANG = "en" end
-
 -- check if stamina is used and death may occured by exhausting
 local mstamina = minetest.get_modpath("stamina")
 local lstamina = 100
@@ -79,18 +74,13 @@ messages.lava = { en = {
 	" went into the lava curtain.",
 	" thought it was a hottub.",
 	" is melted.",
-	" didn't know lava was hot.",
-	" went for a closer look at lava"
+	" didn't know lava was hot."
 },de={
 	" dachte über Lava laufen ist wie über Wasser laufen.",
 	" nahm ein zu heißes Bad in der Lava.",
-	" schmolz in der Lava dahin.",
+	" schmolz dahin.",
 	" verbrennt wie Papier.",
-	" verbrannte sich die Finger.",
-	" versuchte in Lava zu baden.",
-	" wurde von der Lava gegrillt.",
-	" hat sich an der Lava verbrannt.",
-	" kam der Lava zu nahe."
+	" verbrannte sich die Finger."
 }}
 
 -- Drowning death messages
@@ -106,11 +96,9 @@ de = {
 	" verlor die Luft.",
 	" dachte, er sei ein Anker.",
 	" vergass, dass er kein Fisch ist.",
-	" ist untergetaucht.",
+	" ist untergetauch.",
 	" wohnt jetzt bei den Fischen.",
-	" starb an einer Überdosis Dihydrogenmonooxyd.",
-	" vergass aufzutauchen.",
-	" versank und tauchte nicht mehr auf."
+	" starb an einer Überdosis Dihydrogenmonooxyd."
 }}
 --end
 
@@ -124,7 +112,6 @@ messages.fire = {en = {
 },de={
 	" verbrannte sich die Finger.",
 	" wurde geröstet.",
-	" wurde gegrillt.",
 	" brennt wie eine Fackel.",
 	" spielte mit dem Feuer."
 }}
@@ -144,7 +131,7 @@ messages.other = {en = {
 	" got blowed up."
 },de={
 	" starb.",
-	" machte etwas Tödliches.",
+	" machte etwas tödliches.",
 	" ist irgendwie nicht mehr da.",
 	" weilt nicht mehr unter den Lebenden.",
 	" sieht die Radieschen von unten.",
@@ -156,23 +143,20 @@ messages.exhausted = {en = {
 	" was exhausted."
 	},
 	de = {
-	" war erschöpft.",
-	" vergass sein Pausenbrot zu Hause."
+	" war erschöpft."
 	}}
 -- thirst
 messages.thirst = {en = {
 	" was too thirsty."
 	},
 	de = {
-	" verdurstete.",
-	" vergass sein Wasser zu Hause."
+	" verdurstete."
 	}}
 messages.sunburn = {en = {
 	" burned by sun."
 	},
 	de = {
-	" ist von der Sonne verbrannt.",
-	" war zu lange in der Sonner."
+	" ist von der Sonne verbrannt."
 	}}
 	
 -- PVP Messages
@@ -212,11 +196,7 @@ messages.pvp = {en = {
 },de={
 	" geschlagen",
 	" wurde verletzt",
-	" angeschossen",
-	" hitted",
-	" begraben",
-	" angegriffen",
-	" wurde eine Lektion erteilt"
+	" angeschossen"
 }}
 
 -- Player Messages
@@ -237,16 +217,7 @@ messages.player = {en = {
 },de={
 	" weil er nervte.",
 	" denn er brachte den Müll nicht raus.",
-	" für das ungeputzte Bad.",
-	" da er keine Milch einkaufte.",
-	" weil er die Hausaufgaben vergass.",
-	" für das Ärgern des kleinen Bruders.",
-	" für das Ärgern des großen Bruders.",
-	" denn er hörte nicht auf seine Mutter.",
-	" er gebrauchte zu oft das Wort digga.",
-	" aus nicht näher genannten Gründen.",
-	" für den Versuch bei Tic-Tac-Toe zu betrügen.",
-	" denn er war nicht gut genug für den Kampf."
+	" für das ungeputzte Bad."
 }}
 
 -- MOB After Messages
@@ -264,27 +235,13 @@ messages.mobs = {en = {
 	" for talking smack about Oerkkii's mother.",
 	" and grimmaced wryly."
 },de={
-	" zu schnell selbst für Chuck Norris.",
-	" in einer tödlichen Weise.",
 	" und ist das Mittagessen.",
-	" und anschließend wieder ausgespuckt.",
-	" weil er im Weg war.",
-	" denn er brachte den Müll nicht raus.",
-	" für das ungeputzte Bad.",
-	" da er keine Milch einkaufte.",
-	" weil er die Hausaufgaben vergass.",
-	" für das Ärgern des kleinen Bruders.",
-	" für das Ärgern des großen Bruders.",
-	" denn er hörte nicht auf seine Mutter.",
-	" er gebrauchte zu oft das Wort digga.",
-	" aus nicht näher genannten Gründen.",
-	" für den Versuch bei Tic-Tac-Toe zu betrügen.",
-	" denn er war nicht gut genug für den Kampf."
+	" weil er im Weg war."
 }}
 
 local function get_message(mtype)
 	if RANDOM_MESSAGES then
-		return messages[mtype][LANG][math.random(1, #messages[mtype][LANG])]
+		return messages[mtype][LANG][math.random(1, #messages[mtype])]
 	else
 		return messages[1] -- 1 is the index for the non-random message
 	end
