@@ -46,197 +46,27 @@ local sby = { en = " by ", de = " von " }
 local swith = {en = " with ", de = " mit " }
 
 -- Default messages
--- Toxic death messages
-messages.toxic = { en = {
-	" melted into a ball of radioactivity.",
-	" thought chemical waste was cool.",
-	" melted into a jittering pile of flesh.",
-	" couldn't resist that warm glow of toxic water.",
-	" dug straight down.",
-	" went into the toxic curtain.",
-	" thought it was a toxic-tub.",
-	" is radioactive.",
-	" didn't know toxic water was radioactive."
-},
-de={
-	" konnte dem warmen Glühen des giftigen Wassers nicht widerstehen.",
-	" wollte wie Hulk werden.",
-	" ist verstrahlt."
-	}}
--- Lava death messages
-messages.lava = { en = {
-	" melted into a ball of fire.",
-	" thought lava was cool.",
-	" melted into a ball of fire.",
-	" couldn't resist that warm glow of lava.",
-	" dug straight down.",
-	" went into the lava curtain.",
-	" thought it was a hottub.",
-	" is melted.",
-	" didn't know lava was hot."
-},de={
-	" dachte über Lava laufen ist wie über Wasser laufen.",
-	" nahm ein zu heißes Bad in der Lava.",
-	" schmolz dahin.",
-	" verbrennt wie Papier.",
-	" verbrannte sich die Finger."
-}}
 
--- Drowning death messages
-messages.water = { en = {
-	" drowned.",
-	" ran out of air.",
-	" failed at swimming lessons.",
-	" tried to impersonate an anchor.",
-	" forgot he wasn't a fish.",
-	" blew one too many bubbles."},
-de = {
-	" ertrank.",
-	" verlor die Luft.",
-	" dachte, er sei ein Anker.",
-	" vergass, dass er kein Fisch ist.",
-	" ist untergetauch.",
-	" wohnt jetzt bei den Fischen.",
-	" starb an einer Überdosis Dihydrogenmonooxyd."
-}}
---end
+for _,lan in ipairs({"en","de"}) do
+	local infile=minetest.get_modpath("death_messages").."/"..lan..".txt"
+	local file = io.open(infile, "r")
+	for line in file:lines() do
+		if line:sub(1,1) ~= "#" then -- lines starting with # are handled as comment
+			local attribs = line:gsub("\r",""):split(",",true)
+			if #attribs>1 then
+				if messages[attribs[1]]==nil then
+					messages[attribs[1]]={}
+				end
+				if messages[attribs[1]][lan] == nil then
+					messages[attribs[1]][lan] = {}
+				end
+				table.insert(messages[attribs[1]][lan],attribs[2])
+			end
+		end
+	end
+end
 
--- Burning death messages
-messages.fire = {en = {
-	" burned to a crisp.",
-	" got a little too warm.",
-	" got too close to the camp fire.",
-	" just got roasted, hotdog style.",
-	" got burned up. More light that way."
-},de={
-	" verbrannte sich die Finger.",
-	" wurde geröstet.",
-	" brennt wie eine Fackel.",
-	" spielte mit dem Feuer."
-}}
-
--- Other death messages
-messages.other = {en = {
-	" died.",
-	" did something fatal.",
-	" gave up on life.",
-	" is somewhat dead now.",
-	" passed out -permanently.",
-	" kinda screwed up.",
-	" couldn't fight very well.",
-	" got 0wn3d.",
-	" got SMOKED.",
-	" got hurted by Oerkki.",
-	" got blowed up."
-},de={
-	" starb.",
-	" machte etwas tödliches.",
-	" ist irgendwie nicht mehr da.",
-	" weilt nicht mehr unter den Lebenden.",
-	" sieht die Radieschen von unten.",
-	" dient als Dünger."
-}}
-
--- exhausted
-messages.exhausted = {en = {
-	" was exhausted."
-	},
-	de = {
-	" war erschöpft."
-	}}
--- thirst
-messages.thirst = {en = {
-	" was too thirsty."
-	},
-	de = {
-	" verdurstete."
-	}}
-messages.sunburn = {en = {
-	" burned by sun."
-	},
-	de = {
-	" ist von der Sonne verbrannt."
-	}}
-	
--- PVP Messages
-messages.pvp = {en = {
-	" fisted",
-	" sliced up",
-	" rekt",
-	" punched",
-	" hacked",
-	" skewered",
-	" blasted",
-	" tickled",
-	" gotten",
-	" sword checked",
-	" turned into a jittering pile of flesh",
-	" buried",
-	" served",
-	" poked",
-	" attacked viciously",
-	" busted up",
-	" schooled",
-	" told",
-	" learned",
-	" chopped up",
-	" deader than ded ded ded",
-	" CHOSEN to be the ONE",
-	" all kinds of messed up",
-	" smoked like a Newport",
-	" hurted",
-	" ballistic-ed",
-	" jostled",
-	" messed-da-frig-up",
-	" lanced",
-	" shot",
-	" knocked da heck out",
-	" pooped on"
-},de={
-	" geschlagen",
-	" wurde verletzt",
-	" angeschossen"
-}}
-
--- Player Messages
-messages.player = {en = {
-	" for talking smack about thier mother.",
-	" for cheating at Tic-Tac-Toe.",
-	" for being a stinky poop butt.",
-	" for letting Baggins grief.",
-	" because it felt like the right thing to do.",
-	" for spilling milk.",
-	" for wearing a n00b skin.",
-	" for not being good at PVP.",
-	" because they are a n00b.",
-	" for reasons uncertain.",
-	" for using a tablet.",
-	" with the quickness.",
-	" while texting."
-},de={
-	" weil er nervte.",
-	" denn er brachte den Müll nicht raus.",
-	" für das ungeputzte Bad."
-}}
-
--- MOB After Messages
-messages.mobs = {en = {
-	" and was eaten with a gurgling growl.",
-	" then was cooked for dinner.",
-	" then went to the supermarket.",
-	" badly.",
-	" terribly.",
-	" horribly.",
-	" in a haphazard way.",
-	" that sparkles in the twilight with that evil grin.",
-	" and now is covered by blood.",
-	" so swiftly, that not even Chuck Norris could block.",
-	" for talking smack about Oerkkii's mother.",
-	" and grimmaced wryly."
-},de={
-	" und ist das Mittagessen.",
-	" weil er im Weg war."
-}}
+print(dump2(messages))
 
 local function get_message(mtype)
 	if RANDOM_MESSAGES then
@@ -353,7 +183,16 @@ minetest.register_on_dieplayer(function(player,reason)
 		--player:setpos(death)
 		--minetest.sound_play("pacmine_death", { gain = 0.35})  NOPE!!!
 	else
-		minetest.chat_send_all(string.char(0x1b)..player:get_player_name().." "..reason)
+		print(dump2(reason))
+		if reason.type ~= nil then
+				minetest.chat_send_all(string.char(0x1b)..player:get_player_name().." "..reason.type)
+		else
+			if (#reason > 1) then
+				minetest.chat_send_all(string.char(0x1b)..player:get_player_name().." "..reason[1])
+			else
+				minetest.chat_send_all(string.char(0x1b)..player:get_player_name().." "..reason)
+			end
+		end
 	end
 end)
 

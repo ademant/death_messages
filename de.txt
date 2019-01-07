@@ -1,0 +1,35 @@
+toxic, konnte dem warmen Glühen des giftigen Wassers nicht widerstehen.
+toxic, wollte wie Hulk werden.
+toxic, ist verstrahlt.
+lava, dachte über Lava laufen ist wie über Wasser laufen.
+lava, nahm ein zu heißes Bad in der Lava.
+lava, schmolz dahin.
+lava, verbrennt wie Papier.
+lava, verbrannte sich die Finger.
+drown, ertrank.
+drown, verlor die Luft.
+drown, dachte, er sei ein Anker.
+drown, vergass, dass er kein Fisch ist.
+drown, ist untergetauch.
+drown, wohnt jetzt bei den Fischen.
+drown, starb an einer Überdosis Dihydrogenmonooxyd.
+fire, verbrannte sich die Finger.,
+fire, wurde geröstet.,
+fire, brennt wie eine Fackel.,
+fire, spielte mit dem Feuer.
+default, starb.
+default, machte etwas tödliches.
+default, ist irgendwie nicht mehr da.
+default, weilt nicht mehr unter den Lebenden.
+default, sieht die Radieschen von unten.
+default, dient als Dünger.
+exhausted, war erschöpft.
+thirst,	 verdurstete.
+pvp, geschlagen
+pvp, wurde verletzt
+pvp, angeschossen
+player, weil er nervte.
+player, denn er brachte den Müll nicht raus.
+player, für das ungeputzte Bad.
+mobs, und ist das Mittagessen.
+mobs, weil er im Weg war.

@@ -1,0 +1,101 @@
+toxic, melted into a ball of radioactivity.
+toxic, thought chemical waste was cool.
+toxic, melted into a jittering pile of flesh.
+toxic, couldn't resist that warm glow of toxic water.
+toxic, dug straight down.
+toxic, went into the toxic curtain.
+toxic, thought it was a toxic-tub.
+toxic, is radioactive.
+toxic, didn't know toxic water was radioactive.
+lava, melted into a ball of fire.
+lava, thought lava was cool.
+lava, melted into a ball of fire.
+lava, couldn't resist that warm glow of lava.
+lava, dug straight down.
+lava, went into the lava curtain.
+lava, thought it was a hottub.
+lava, is melted.
+lava, didn't know lava was hot.
+drown, drowned.
+drown, ran out of air.
+drown, failed at swimming lessons.
+drown, tried to impersonate an anchor.
+drown, forgot he wasn't a fish.
+drown, blew one too many bubbles.
+fire, burned to a crisp.
+fire, got a little too warm.
+fire, got too close to the camp fire.
+fire, just got roasted, hotdog style.
+fire, got burned up. More light that way.
+default, died.
+default, did something fatal.
+default, gave up on life.
+default, is somewhat dead now.
+default, passed out -permanently.
+default, kinda screwed up.
+default, couldn't fight very well.
+default, got 0wn3d.
+default, got SMOKED.
+default, got hurted by Oerkki.
+default, got blowed up.
+fall, thought, he could fly.
+fall, dropped like a stone.
+exhausted, was exhausted.
+thirst, was too thirsty.
+pvp, fisted
+pvp, sliced up
+pvp, rekt
+pvp, punched
+pvp, hacked
+pvp, skewered
+pvp, blasted
+pvp, tickled
+pvp, gotten
+pvp, sword checked
+pvp, turned into a jittering pile of flesh
+pvp, buried
+pvp, served
+pvp, poked
+pvp, attacked viciously
+pvp, busted up
+pvp, schooled
+pvp, told
+pvp, learned
+pvp, chopped up
+pvp, deader than ded ded ded
+pvp, CHOSEN to be the ONE
+pvp, all kinds of messed up
+pvp, smoked like a Newport
+pvp, hurted
+pvp, ballistic-ed
+pvp, jostled
+pvp, messed-da-frig-up
+pvp, lanced
+pvp, shot
+pvp, knocked da heck out
+pvp, pooped on
+player, for talking smack about thier mother.
+player, for cheating at Tic-Tac-Toe.
+player, for being a stinky poop butt.
+player, for letting Baggins grief.
+player, because it felt like the right thing to do.
+player, for spilling milk.
+player, for wearing a n00b skin.
+player, for not being good at PVP.
+player, because they are a n00b.
+player, for reasons uncertain.
+player, for using a tablet.
+player, with the quickness.
+player, while texting.
+mobs, and was eaten with a gurgling growl.
+mobs, then was cooked for dinner.
+mobs, then went to the supermarket.
+mobs, badly.
+mobs, terribly.
+mobs, horribly.
+mobs, in a haphazard way.
+mobs, that sparkles in the twilight with that evil grin.
+mobs, and now is covered by blood.
+mobs, so swiftly, that not even Chuck Norris could block.
+mobs, for talking smack about Oerkkii's mother.
+mobs, and grimmaced wryly.
