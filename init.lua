@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 --mods/default/sounds/player_death.ogg: from OpenArena – GNU GPL v2.
 -----------------------------------------------------------------------------------------------
 local title = "Death Messages"
-local version = "0.1.4"
+local version = "0.1.5"
 local mname = "death_messages"
 -----------------------------------------------------------------------------------------------
 dofile(minetest.get_modpath("death_messages").."/settings.txt")
@@ -46,8 +46,9 @@ local sby = { en = " by ", de = " von " }
 local swith = {en = " with ", de = " mit " }
 
 -- Default messages
-
+-- Read messages per language file
 for _,lan in ipairs({"en","de"}) do
+--	local lan=tlan:gsub(".txt",""):gsub("./","")
 	local infile=minetest.get_modpath("death_messages").."/"..lan..".txt"
 	local file = io.open(infile, "r")
 	for line in file:lines() do
@@ -65,8 +66,6 @@ for _,lan in ipairs({"en","de"}) do
 		end
 	end
 end
-
-print(dump2(messages))
 
 local function get_message(mtype)
 	if RANDOM_MESSAGES then
@@ -86,114 +85,85 @@ local function get_int_attribute(player, key)
 end
 
 
-
+local function guess_reason(player)
+	local node = minetest.registered_nodes[minetest.get_node(player:getpos()).name]
+	local pos = player:getpos()
+	local reas_meas="default"
+	pos.x = math.floor(pos.x + 0.5)
+	pos.y = math.floor(pos.y + 0.5)
+	pos.z = math.floor(pos.z + 0.5)
+	local param2 = minetest.dir_to_facedir(player:get_look_dir())
+	if mstamina ~= nil then
+		lstamina = get_int_attribute(player, "stamina:level")
+	end
+	if mhbhunger ~= nil then
+		lstamina = tonumber(hbhunger.hunger[player_name])
+	end
+	if mthirsty ~= nil then
+		lthirsty = thirsty.get_thirst_factor(player)
+	end
+	if msunburn ~= nil then
+		lsunburn = sunburn.get_sunburn(player)
+	end
+	
+	-- Death by lava
+	if node.name == "default:lava_source" then
+		reas_meas="lava"
+	elseif node.name == "default:lava_flowing"  then
+		reas_meas="lava"
+	-- Death by drowning
+	elseif player:get_breath() == 0 then
+		reas_meas="drown"
+	-- Death by fire
+	elseif node.name == "fire:basic_flame" then
+		reas_meas="fire"
+	-- Death by Toxic water
+	elseif node.name == "es:toxic_water_source" then
+		reas_meas="toxic"
+	elseif node.name == "es:toxic_water_flowing" then
+		reas_meas="toxic"
+	elseif node.name == "groups:radioactive" then
+		reas_meas="toxic"
+	elseif lthirsty <= 1 then
+		reas_meas="thirst"
+	elseif lstamina <= 1 then
+		reas_meas="exhausted"
+	elseif lsunburn >= 19 then
+		reas_meas="sunburn"
+	-- Death by something else
+	else
+		reas_meas="default"
+	end
+end
 
 minetest.register_on_dieplayer(function(player,reason)
+	reas_meas="default"
+	local player_name = player:get_player_name()
+	if minetest.is_singleplayer() then
+		player_name = "You"
+	end
+	local node = minetest.registered_nodes[minetest.get_node(player:getpos()).name]
+	local pos = player:getpos()
+	minetest.sound_play("player_death", {pos = pos, gain = 1})
 	if reason == nil then
-		local player_name = player:get_player_name()
-		local node = minetest.registered_nodes[minetest.get_node(player:getpos()).name]
-		local pos = player:getpos()
-		local death = {x=0, y=23, z=-1.5}
-		minetest.sound_play("player_death", {pos = pos, gain = 1})
-		pos.x = math.floor(pos.x + 0.5)
-		pos.y = math.floor(pos.y + 0.5)
-		pos.z = math.floor(pos.z + 0.5)
-		local param2 = minetest.dir_to_facedir(player:get_look_dir())
-		local player_name = player:get_player_name()
-		if minetest.is_singleplayer() then
-			player_name = "You"
-		end
-		if mstamina ~= nil then
-			lstamina = get_int_attribute(player, "stamina:level")
-		end
-		if mhbhunger ~= nil then
-			lstamina = tonumber(hbhunger.hunger[player_name])
-		end
-		if mthirsty ~= nil then
-			lthirsty = thirsty.get_thirst_factor(player)
-		end
-		if msunburn ~= nil then
-			lsunburn = sunburn.get_sunburn(player)
-		end
-		
-		-- Death by lava
-		if node.name == "default:lava_source" then
-			minetest.chat_send_all(
-			string.char(0x1b).."(c@#00CED1)"..player_name .. 
-			string.char(0x1b).."(c@#ff0000)"..get_message("lava"))
-			--player:setpos(death)
-		elseif node.name == "default:lava_flowing"  then
-			minetest.chat_send_all(
-			string.char(0x1b).."(c@#00CED1)"..player_name .. 
-			string.char(0x1b).."(c@#ff0000)"..get_message("lava"))
-			--player:setpos(death)
-		-- Death by drowning
-		elseif player:get_breath() == 0 then
-			minetest.chat_send_all(
-			string.char(0x1b).."(c@#00CED1)"..player_name .. 
-			string.char(0x1b).."(c@#ff0000)"..get_message("water"))
-			--player:setpos(death)
-		-- Death by fire
-		elseif node.name == "fire:basic_flame" then
-			minetest.chat_send_all(
-			string.char(0x1b).."(c@#00CED1)"..player_name .. 
-			string.char(0x1b).."(c@#ff0000)"..get_message("fire"))
-			--player:setpos(death)
-		-- Death by Toxic water
-		elseif node.name == "es:toxic_water_source" then
-			minetest.chat_send_all(
-			string.char(0x1b).."(c@#00CED1)"..player_name .. 
-			string.char(0x1b).."(c@#ff0000)"..get_message("toxic"))
-			--player:setpos(death)
-		elseif node.name == "es:toxic_water_flowing" then
-			minetest.chat_send_all(
-			string.char(0x1b).."(c@#00CED1)"..player_name .. 
-			string.char(0x1b).."(c@#ff0000)"..get_message("toxic"))
-			--player:setpos(death)
-		elseif node.name == "groups:radioactive" then
-			minetest.chat_send_all(
-			string.char(0x1b).."(c@#00CED1)"..player_name .. 
-			string.char(0x1b).."(c@#ff0000)"..get_message("toxic"))
-			--player:setpos(death)	
-		elseif lthirsty <= 1 then
-			minetest.chat_send_all(
-			string.char(0x1b).."(c@#00CED1)"..player_name .. 
-			string.char(0x1b).."(c@#ff0000)"..get_message("thirst"))
-		elseif lstamina <= 1 then
-			minetest.chat_send_all(
-			string.char(0x1b).."(c@#00CED1)"..player_name .. 
-			string.char(0x1b).."(c@#ff0000)"..get_message("exhausted"))
-		elseif lsunburn >= 19 then
-			minetest.chat_send_all(
-			string.char(0x1b).."(c@#00CED1)"..player_name .. 
-			string.char(0x1b).."(c@#ff0000)"..get_message("sunburn"))
-		-- Death by something else
-		else
-			minetest.chat_send_all(
-			string.char(0x1b).."(c@#ffffff)"..player_name .. 
-			string.char(0x1b).."(c@#ff0000)"..get_message("other"))  --toospammy
-			--minetest.after(0.5, function(holding)
-				--player:setpos(death)  --gamebreaker?
-			--end)
-		end
-		
-		
-		--minetest.chat_send_all(string.char(0x1b).."(c@#000000)".."[DEATH COORDINATES] "..string.char(0x1b).."(c@#ffffff)" .. player_name .. string.char(0x1b).."(c@#000000)".." left a corpse full of diamonds here: " ..
-		--minetest.pos_to_string(pos) .. string.char(0x1b).."(c@#aaaaaa)".." Come and get them!")
-		--player:setpos(death)
-		--minetest.sound_play("pacmine_death", { gain = 0.35})  NOPE!!!
+		reas_meas=guess_reason(player)
 	else
 		print(dump2(reason))
 		if reason.type ~= nil then
-				minetest.chat_send_all(string.char(0x1b)..player:get_player_name().." "..reason.type)
+			if (reason.type == "fall") or (reason.type == "punch") or (reason.type == "drawn") then
+				reas_mean = reason.type
+			else
+				reas_mean=guess_reason(player)
+			end
 		else
 			if (#reason > 1) then
-				minetest.chat_send_all(string.char(0x1b)..player:get_player_name().." "..reason[1])
+				reas_meas="default"
 			else
-				minetest.chat_send_all(string.char(0x1b)..player:get_player_name().." "..reason)
+				reas_meas="default"
 			end
 		end
 	end
+	minetest.chat_send_all(string.char(0x1b).."(c@#00CED1)"..player_name..string.char(0x1b).."(c@#ff0000)"..get_message(meas_reas))
 end)
 
 --bigfoot code
