@@ -68,6 +68,7 @@ for _,lan in ipairs({"en","de"}) do
 end
 
 local function get_message(mtype)
+	if mtype==nil then mtype="default" end
 	if RANDOM_MESSAGES then
 		return messages[mtype][LANG][math.random(1, #messages[mtype])]
 	else
@@ -163,7 +164,7 @@ minetest.register_on_dieplayer(function(player,reason)
 			end
 		end
 	end
-	minetest.chat_send_all(string.char(0x1b).."(c@#00CED1)"..player_name..string.char(0x1b).."(c@#ff0000)"..get_message(meas_reas))
+	minetest.chat_send_all(string.char(0x1b).."(c@#00CED1)"..player_name..string.char(0x1b).."(c@#ff0000)"..get_message(reas_meas))
 end)
 
 --bigfoot code
