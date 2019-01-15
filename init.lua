@@ -70,7 +70,8 @@ end
 local function get_message(mtype)
 	if mtype==nil then mtype="default" end
 	if RANDOM_MESSAGES then
-		return messages[mtype][LANG][math.random(1, #messages[mtype])]
+		local lmessages=messages[mtype][LANG]
+		return lmessages[math.random(1, #lmessages)]
 	else
 		return messages[1] -- 1 is the index for the non-random message
 	end
